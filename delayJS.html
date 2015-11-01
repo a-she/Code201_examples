@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JS delay to let DOM render first</title>
+</head>
+<body>
+
+  <h1>JS delay to let DOM render first</h1>
+  <h2><i>by Al</i></h2>
+
+  <p>Now I know my...
+    <ul>
+      <li>A</li>
+      <li>B</li>
+      <li>C's</li>
+    </ul>
+  </p>
+
+  <p>Next time won't you code with me?
+  </p>
+
+  <script>
+  // Set timer to run JS later to give DOM time to render
+  // This is a "one-shot" timer (use setInterval() when to periodically execute a function).
+  var mytimer = setInterval (
+      function() { // First arg to setInterval(). Code that should run after a delay.
+      if( /loaded|complete/.test(document.readyState)) {
+        clearInterval(mytimer);
+        askName(); // Run JS code below
+      }
+    },
+    10) // 2nd arg to setInterval(); the time delay (in milliseconds)
+
+  function askName() {
+    var name = prompt ("What is your name?"); // Store user input
+    console.log("The value of 'name' is: "+name);
+    alert("Nice to meet you, "+ name+"! Have a smashing (pumpkin) day!");
+  }
+  </script>
+
+</body>
+</html>
