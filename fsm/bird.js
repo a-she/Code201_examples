@@ -47,13 +47,17 @@ var Event = {
    Shot  : 2
 };
 
+// Constructor for the FSM
+// .processInput() is the FSM's "turn the crank" method (driven by
+// inputs, which we call "events" in this code.
 function birdFSM(st) {
   this.state = st; // Initial state
   stlogNoBR(this.state);
   mylog("birdFSM() constructor called with state = " + st);
 
   this.processInput = function(event) {
-    evlogNoBR(event)
+    evlogNoBR(event);
+
     switch (this.state) {
     case "Nest":
       if (event == "Time") { this.state = "Hunt"; }
@@ -112,7 +116,7 @@ function resetFSM() {
 btnTime.addEventListener( "click", function() { eagleFSM.processInput("Time" ); }, false);
 btnCatch.addEventListener("click", function() { eagleFSM.processInput("Catch"); }, false);
 btnShot.addEventListener( "click", function() { eagleFSM.processInput("Shot" ); }, false);
-btnPhoenix.addEventListener("click",resetFSM, false);
+btnPhoenix.addEventListener("click", resetFSM, false);
 
 clearLog();
 
